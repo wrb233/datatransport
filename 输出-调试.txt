@@ -1,0 +1,98 @@
+﻿“hisrecord.exe”: 已加载“D:\professional\visualstudio\code\hisrecord\release\hisrecord.exe”，已加载符号。
+“hisrecord.exe”: 已加载“C:\Windows\System32\ntdll.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\kernel32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\KernelBase.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\ws2_32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\rpcrt4.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\ACE.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libapplication.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libtolerance.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libdatabase.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\user32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\win32u.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\gdi32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\gdi32full.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\msvcp_win.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\ucrtbase.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\advapi32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\msvcrt.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\sechost.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\liborm.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\log4cplus.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\msvcp100.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\QtGui4.dll”，未使用调试信息生成二进制文件。
+“hisrecord.exe”: 已加载“C:\Windows\System32\msvcr100.dll”，已加载符号。
+“hisrecord.exe”: 已加载“C:\Windows\System32\IPHLPAPI.DLL”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\comdlg32.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\combase.dll”，已加载符号。
+“hisrecord.exe”: 已加载“C:\Windows\System32\bcryptprimitives.dll”，已加载符号(去除源信息)。
+“hisrecord.exe”: 已加载“C:\Windows\System32\SHCore.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\shlwapi.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\QtCore4.dll”，未使用调试信息生成二进制文件。
+“hisrecord.exe”: 已加载“C:\Windows\System32\shell32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\cfgmgr32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\ole32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\windows.storage.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\profapi.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\powrprof.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libCMTDatabase.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\umpdc.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\kernel.appcore.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\cryptsp.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\oleaut32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\liboms.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\imm32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libORMDatabase.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libACE_QtReactor.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\processmanager.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libfileaccess.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\psapi.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\mswsock.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\netapi32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\app\oracle\product\11.2.0\dbhome_1\BIN\oci.dll”，未使用调试信息生成二进制文件。
+“hisrecord.exe”: 已加载“C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.18362.476_none_e6c4b11b130f2595\comctl32.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libCPSIniFile.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\winmm.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\winspool.drv”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\bcrypt.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“D:\CPS_Project\win7\bin\libCacheQueue.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\WinSxS\amd64_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.9659_none_88dfc6bf2faefcc6\msvcr80.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\winmmbase.dll”，Cannot find or open the PDB file
+“hisrecord.exe”: 已加载“C:\Windows\System32\propsys.dll”，Cannot find or open the PDB file
+My name is  "Jack" , nice to meet you! 
+
+My name is Jack, nice to meet you!
+
+My name is 
+My name is 
+My name is 
+My name is 
+My name is 
+My name is 
+My name is 
+max vlaue is 6 
+
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处最可能的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突
+hisrecord.exe 中的 0x00007ffbe33078b7 处有未经处理的异常: 0xC0000005: 读取位置 0x0000000000000000 时发生访问冲突

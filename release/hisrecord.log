@@ -1,0 +1,41 @@
+﻿生成启动时间为 2019/12/13 16:58:36。
+     1>项目“D:\professional\visualstudio\code\hisrecord\hisrecord.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“release\hisrecord.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       CustomBuild:
+         所有输出均为最新。
+       ClCompile:
+         D:\professional\visualstudio\directory\VC\bin\x86_amd64\CL.exe /c /ID:\Qt\4.8.4\include\QtCore /ID:\Qt\4.8.4\include\QtGui /ID:\Qt\4.8.4\include /I. /ID:\CPS_Project\CPS\include /ID:\CPS_Project\win7\include /ID:\CPS_Project\CPS\include\net /I"D:\Qt\4.8.4\mkspecs\win32-msvc2010" /ID:\Qt\4.8.4\include\ActiveQt /Irelease /ID:\Qt\4.8.4\include /I"..\..\..\..\Qt\4.8.4\mkspecs\win32-msvc2010" /Zi /nologo /W0 /WX- /Od /D WIN32_LEAN_AND_MEAN /D _WINDOWS /D WIN32 /D QT_LARGEFILE_SUPPORT /D CPS_PROJECT20 /D _CRT_SECURE_NO_DEPRECATE /D _M_IX64 /D WIN32 /D QT_DLL /D QT_NO_DEBUG /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /D NDEBUG /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"release\\" /Fd".\vc100.pdb" /Gd /TP /errorReport:prompt main.cpp -Zm200 
+         main.cpp
+       ResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\professional\visualstudio\directory\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"release\\hisrecord.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\CPS_Project\win7\lib /LIBPATH:D:\CPS_Project\win7\thirdpartylib /LIBPATH:D:\Qt\4.8.4\lib D:\CPS_Project\win7\thirdpartylib\qtmain.lib ACE.lib libdatabase.lib libORMDatabase.lib libapplication.lib UserMS.lib libtolerance.lib liborm.lib log4cplus.lib liboms.lib D:\CPS_Project\win7\thirdpartylib\QtGui4.lib D:\CPS_Project\win7\thirdpartylib\QtCore4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"release\hisrecord.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\professional\visualstudio\code\hisrecord\release\hisrecord.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X64 release\hisrecord.res
+         release\DBThread.obj
+         release\IncrementCommit.obj
+         release\InfoHandleThread.obj
+         release\NotificationCallback.obj
+         release\ToolUtil.obj
+         release\hisrecord.obj
+         release\main.obj
+         release\version.obj
+         release\moc_DBThread.obj
+         release\moc_InfoHandleThread.obj
+         release\moc_ToolUtil.obj "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" 
+         hisrecord.vcxproj -> D:\professional\visualstudio\code\hisrecord\release\hisrecord.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"release\\hisrecord.exe;#1" /manifest release\hisrecord.exe.intermediate.manifest
+       PostBuildEvent:
+         Description: copy /y release\*.exe D:\CPS_Project\win7\bin
+         copy /y release\*.exe D:\CPS_Project\win7\bin
+         :VCEnd
+         release\hisrecord.exe
+         已复制         1 个文件。
+       FinalizeBuildStatus:
+         正在删除文件“release\hisrecord.unsuccessfulbuild”。
+         正在对“release\hisrecord.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\professional\visualstudio\code\hisrecord\hisrecord.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:07.97
