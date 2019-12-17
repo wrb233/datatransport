@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9B3E9527-B2EF-3FC8-9D91-A7193E048577}</ProjectGuid>
-    <RootNamespace>datatransform</RootNamespace>
+    <ProjectGuid>{CC86D27C-CCFA-35B0-A1D9-15CB5CA50AE6}</ProjectGuid>
+    <RootNamespace>datatransformd</RootNamespace>
     <Keyword>Qt4VSv1.0</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -22,7 +22,7 @@
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>debug\</IntermediateDirectory>
-    <PrimaryOutput>datatransform</PrimaryOutput>
+    <PrimaryOutput>datatransformd</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <OutputDirectory>release\</OutputDirectory>
@@ -44,7 +44,7 @@
   <PropertyGroup>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">datatransform</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">datatransformd</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkIncremental>
     <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</PostBuildEventUseInBuild>
@@ -83,7 +83,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
-      <OutputFile>$(OutDir)\datatransform.exe</OutputFile>
+      <OutputFile>$(OutDir)\datatransformd.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -131,7 +131,7 @@
       <LinkIncremental>false</LinkIncremental>
       <OutputFile>$(OutDir)\datatransform.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
@@ -194,7 +194,16 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_ToolUtil.cpp;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="common.h" />
-    <ClInclude Include="datatransform.h" />
+    <CustomBuild Include="datatransform.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;datatransform.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DCPS_PROJECT20 -D_CRT_SECURE_NO_DEPRECATE -D_M_IX64 -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include" -I"." -I"$(CPS_ROOT)\CPS\include" -I"$(CPS_ENV)\include" -I"$(CPS_ROOT)\CPS\include\net" -I"$(QTDIR)\mkspecs\win32-msvc2010" -I"$(QTDIR)\include\ActiveQt" -I"debug" -I"$(QTDIR)\include" -I..\..\..\..\Qt\4.8.4\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 datatransform.h -o debug\moc_datatransform.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC datatransform.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_datatransform.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;datatransform.h;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DCPS_PROJECT20 -D_CRT_SECURE_NO_DEPRECATE -D_M_IX64 -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include" -I"." -I"$(CPS_ROOT)\CPS\include" -I"$(CPS_ENV)\include" -I"$(CPS_ROOT)\CPS\include\net" -I"$(QTDIR)\mkspecs\win32-msvc2010" -I"$(QTDIR)\include\ActiveQt" -I"release" -I"$(QTDIR)\include" -I..\..\..\..\Qt\4.8.4\mkspecs\win32-msvc2010 -D_MSC_VER=1600 -DWIN32 datatransform.h -o release\moc_datatransform.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC datatransform.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_datatransform.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +229,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="release\moc_ToolUtil.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_datatransform.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_datatransform.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>

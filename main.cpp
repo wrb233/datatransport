@@ -9,6 +9,9 @@
 #include<string>
 #include<iostream>
 #include<typeinfo>
+#include<fstream>
+
+
 
 using namespace std; 
 
@@ -28,7 +31,8 @@ QMap<ObId, Feeder> feeders;
 QMap<ObId, MVPointOfFeeder> mvPointOfFeeders;
 
 //自定义比较函数
-int maxnum(int num1, int  num2){
+int maxnum(int num1, int  num2)
+{
 	int result;
     if (num1 > num2)
     	result = num1;
@@ -43,7 +47,8 @@ void ObjectIdtoName(ObId obId)
     StringData data;//声明StringData数据类型
     ToolUtil::databaseRead(obId, AT_Name, &data);
 	std::string s1 = data;
-	qDebug()<<"the name of obId is:"<<QString::fromStdString(s1);
+	//qDebug()<<"the name of obId is:"<<QString::fromStdString(s1)<<endl;
+	qDebug()<<"the name of obId is:"<<QString::fromStdString(s1)<<endl;
 	}
 
 //获取所有下级ObId
@@ -106,7 +111,7 @@ int main(int argc, char *argv[])
 	ConfigureAndWatchThread configureThread(cfgPath.toStdString().c_str(), 5 * 1000);
 
 
-	//定义hisrecord应用级app
+	//定义datatransport应用级app
 	OptionList optionList;
 	dataTransform = new DataTransform(argc, argv, NULL,optionList,RUNTIME_SCOPE);
 	
@@ -118,43 +123,26 @@ int main(int argc, char *argv[])
 		std::exit(0);
 	}
 
-
-	
-	
-	OT_DMSCommunicateUnit = database->matchOType("DMSCommunicateUnit");
-	Condition* conditions = NULL;
-	int numberOfConditions = 0;
-	int numElements = 0;
-	numElements = database->find(OT_DMSCommunicateUnit,conditions,numberOfConditions);
-	
-	ObId* objects = new ObId[numElements];
-	//int maximumNumberOfObjects;
-	
-	database->find(OT_DMSCommunicateUnit, conditions, numberOfConditions, objects, numElements);
+	dataTransform->timerTask();
 	
 	
 
-	qDebug()<<numElements;
 
-	cout << "汉字";
 
-	for( int i=0;i<numElements;i++){
-		
-		
-		cout << objects[i] << endl;
+		//这四个outFile不生效
+	    //outFile <<"the name of obId is:"<<QString::fromStdString(s1)<<endl;
+	    //outFile << QString::fromStdString(s1) <<endl;
+		//outFile << data << endl;
+		//outFile <<ObjectIdtoName(objects[i]);
+	//}
 
-		//std::cout << "ssssssssssss" << std::endl;
 
-		//cout << typeid(objects[i]).name() << endl;
-		
-		ObjectIdtoName(objects[i]);
-		//qDebug()<<ObjectIdtoName(objects[i]);
-	}
+	
 
 
 
 
-	qDebug()<<"----------------------------------------------";
+	//qDebug()<<"----------------------------------------------";
 
 	
 
@@ -209,7 +197,7 @@ int main(int argc, char *argv[])
 	/*std::string s3 = childrenListOfPMSRoot;
 	qDebug()<<"the ChildrenList of PMSRoot is:"<<QString::fromStdString(s3);*/
 
-	
+	/*
 
 	//获取历史库指针
 	if (!ToolUtil::connectDB(argc, argv))
@@ -234,6 +222,9 @@ int main(int argc, char *argv[])
 	//启动新线程定时处理数据文件，存储到数据库中
 	DBThread* dbThread = new DBThread();
 	dbThread->start();	
+
+
+	*/
 
 	dataTransform->svc();
 	return 1;

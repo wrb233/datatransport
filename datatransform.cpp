@@ -26,11 +26,62 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 			std::exit(0);
 		}
 	}
+
+	
+
+}
+
+void DataTransform::timerTask()
+{
+	QTimer *timer = new QTimer();
+	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+	timer->start(1000);
 }
 
 DataTransform::~DataTransform()
 {
 
+}
+
+void DataTransform::update()
+{
+	//新建输出流
+	ofstream outFile;
+    //打开文件,在D盘根目录下创建Test2.txt文件
+    outFile.open("D:\\Test2.txt");
+	//初始化find函数需要的参数
+	OT_DMSCommunicateUnit = database->matchOType("DMSCommunicateUnit");
+	Condition* conditions = NULL;
+	int numberOfConditions = 0;
+	int numElements = 0;
+	numElements = database->find(OT_DMSCommunicateUnit,conditions,numberOfConditions);
+	//新建*个ObId对象
+	ObId* objects = new ObId[numElements];
+	
+	//find函数重载
+	database->find(OT_DMSCommunicateUnit, conditions, numberOfConditions, objects, numElements);
+	
+	
+	//把满足条件的ObId个数输出
+	outFile << "OType为DMSCommunicateUnit的节点共有" <<numElements << "个" << endl;
+
+	
+	//定义for循环取出所有ObId
+	for( int i=0;i<numElements;i++)
+	{
+
+		//输出所有ObId
+		outFile << objects[i] << endl;
+
+		//声明StringData数据类型
+		StringData data;
+		//利用databaseRead函数得到返回的name属性
+        ToolUtil::databaseRead(objects[i], AT_Name, &data);
+		//string name = data;
+
+		//输出所有ObId对应的name属性
+		//outFile << name <<endl;
+	}
 }
 
 //初始化注册回调函数

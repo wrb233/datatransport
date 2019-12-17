@@ -5,6 +5,7 @@
 
 class DataTransform: public QtApplication
 {
+	Q_OBJECT
 public:
 
 	//构造函数
@@ -19,6 +20,14 @@ public:
 	//初始化注册回调函数
 	void initNotificationCallback();
 
+	void timerTask();
+
 	void writeSQLFileByInfo(QStringList &tableNameList,QStringList &sqlList,QString fileName=QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+".sql",QString path="data");
+
+	public slots:
+	void update();
+
+
+
 };
 #endif 

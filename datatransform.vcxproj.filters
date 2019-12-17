@@ -77,9 +77,9 @@
     <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="datatransform.h">
+    <CustomBuild Include="datatransform.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
     <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -107,6 +107,12 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_ToolUtil.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_datatransform.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_datatransform.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
