@@ -13,7 +13,11 @@
 
 
 
+
+
 using namespace std; 
+
+
 
 DataTransform* dataTransform = NULL;
 DBPOOLHANDLE dbPoolHandle;//定义历史库全局变量
@@ -96,6 +100,8 @@ int main(int argc, char *argv[])
 	}
 
 	//配置打印日志
+
+	
 	QString processName = "hisRecordLog";
 	char* cpsenv = getenv("CPS_ENV");
 	QString cfgPath = QString::fromUtf8(cpsenv) + "/etc/logConfig/" + processName + ".properties"; 
@@ -109,7 +115,7 @@ int main(int argc, char *argv[])
 	LogLog::getLogLog()->setInternalDebugging(true); 
 	Logger root = Logger::getRoot(); 
 	ConfigureAndWatchThread configureThread(cfgPath.toStdString().c_str(), 5 * 1000);
-
+	
 
 	//定义datatransport应用级app
 	OptionList optionList;
@@ -124,6 +130,7 @@ int main(int argc, char *argv[])
 	}
 
 	dataTransform->timerTask();
+	
 	
 	
 
@@ -225,6 +232,7 @@ int main(int argc, char *argv[])
 
 
 	*/
+
 
 	dataTransform->svc();
 	return 1;

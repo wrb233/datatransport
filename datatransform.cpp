@@ -31,6 +31,8 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 
 }
 
+
+//编写槽函数update()每一秒执行一次
 void DataTransform::timerTask()
 {
 	QTimer *timer = new QTimer();
@@ -43,8 +45,21 @@ DataTransform::~DataTransform()
 
 }
 
+
+
+//update()代码逻辑
 void DataTransform::update()
+
+
+
+
 {
+	
+
+
+
+	  
+	
 	//新建输出流
 	ofstream outFile;
     //打开文件,在D盘根目录下创建Test2.txt文件
@@ -67,6 +82,7 @@ void DataTransform::update()
 
 	
 	//定义for循环取出所有ObId
+	QStringList jsonList;
 	for( int i=0;i<numElements;i++)
 	{
 
@@ -77,11 +93,37 @@ void DataTransform::update()
 		StringData data;
 		//利用databaseRead函数得到返回的name属性
         ToolUtil::databaseRead(objects[i], AT_Name, &data);
+		
+
+		
+		QString id = QString::number(objects[i]);
+
+		OMString str = (OMString)data;
+		QString name = QString::fromUtf8(str.c_str());
+
+		QMap<QString,QString> map;
+		map.insert("id",id);
+		map.insert("name",name);
+
+		QString json = ToolUtil::convertQMapToJson(map);
+		jsonList.append(json);
+
+		
+
+
+	
+	
+	
+	
+	
+	
 		//string name = data;
 
 		//输出所有ObId对应的name属性
 		//outFile << name <<endl;
+		
 	}
+	ToolUtil::writeJsonFileByInfo(jsonList,"H_TEST");
 }
 
 //初始化注册回调函数

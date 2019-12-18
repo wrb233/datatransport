@@ -1,4 +1,4 @@
-﻿生成启动时间为 2019/12/16 16:40:07。
+﻿生成启动时间为 2019/12/17 17:46:30。
      1>项目“D:\professional\visualstudio\code\datatransform\datatransform.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在对“release\datatransform.unsuccessfulbuild”执行 Touch 任务。
@@ -40,4 +40,4 @@
 
 生成成功。
 
-已用时间 00:00:05.97
+已用时间 00:00:05.82

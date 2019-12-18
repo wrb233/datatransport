@@ -419,3 +419,56 @@ QDateTime ToolUtil::convertTimespecToQDatetime(timespec_t ts)
 	return datetime;
 
 }
+
+QString ToolUtil::convertQMapToJson(QMap<QString,QString> map)
+{
+	QString json = "";
+
+	QString jsonArrayStart = "[";
+	QString jsonArrayEnd = "]";	
+	QString jsonObject = "{\"%1\":\"%2\"}";
+
+	QMap<QString,QString>::iterator it; 
+	for ( it = map.begin(); it != map.end(); ++it )
+	{
+		json = json.append(jsonObject.arg(it.key()).arg(it.value())).append(",");
+	}
+	json = json.left(json.length()-1);
+	json = jsonArrayStart.append(json).append(jsonArrayEnd);
+	qDebug( )<<json;
+	
+	return json;
+}
+
+void ToolUtil::writeJsonFileByInfo(QStringList jsonList, QString fileName)
+{
+	ToolUtil::myDebug("MethodName:writeJsonFileByInfo start");
+	char* cpsenv = getenv("CPS_ENV");
+	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/monitor/json/"; 
+	QDir dir(sqlFileFolderPath);
+	if(!dir.exists())
+	{
+		dir.mkpath(sqlFileFolderPath);
+	}
+	ToolUtil::myDebug(sqlFileFolderPath);
+
+	fileName = fileName.append(QDateTime::currentDateTime().toString("_yyyyMMddhhmmsszzz"));
+	QFile f(sqlFileFolderPath+fileName);  
+	if(!f.open(QIODevice::WriteOnly | QIODevice::Text))  
+	{  
+		ToolUtil::myDebug("Open failed");
+		return;
+	}  
+
+	QTextStream datOutput(&f); 
+	foreach(QString json,jsonList)
+	{
+		datOutput << json<< endl; 
+	}
+	
+
+	datOutput.flush();
+	f.flush();
+	f.close();
+	ToolUtil::myDebug("MethodName:writeJsonFileByInfo end");
+}
