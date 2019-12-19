@@ -37,7 +37,7 @@ void DataTransform::timerTask()
 {
 	QTimer *timer = new QTimer();
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-	timer->start(1000);
+	timer->start(1000*60);
 }
 
 DataTransform::~DataTransform()
@@ -61,10 +61,12 @@ void DataTransform::update()
 	  
 	
 	//新建输出流
-	ofstream outFile;
+	//ofstream outFile;
     //打开文件,在D盘根目录下创建Test2.txt文件
-    outFile.open("D:\\Test2.txt");
+    //outFile.open("D:\\Test2.txt");
 	//初始化find函数需要的参数
+
+
 	OT_DMSCommunicateUnit = database->matchOType("DMSCommunicateUnit");
 	Condition* conditions = NULL;
 	int numberOfConditions = 0;
@@ -77,45 +79,44 @@ void DataTransform::update()
 	database->find(OT_DMSCommunicateUnit, conditions, numberOfConditions, objects, numElements);
 	
 	
-	//把满足条件的ObId个数输出
-	outFile << "OType为DMSCommunicateUnit的节点共有" <<numElements << "个" << endl;
+	//把满足条件的ObId个数输出 2282个
+	//outFile << "OType为DMSCommunicateUnit的节点共有" <<numElements << "个" << endl;
 
 	
 	//定义for循环取出所有ObId
-	QStringList jsonList;
+	//QStringList jsonList;
+
+	QList<QMap<QString,QString>>list;
 	for( int i=0;i<numElements;i++)
 	{
 
 		//输出所有ObId
-		outFile << objects[i] << endl;
+		//outFile << objects[i] << endl;
 
 		//声明StringData数据类型
 		StringData data;
 		//利用databaseRead函数得到返回的name属性
         ToolUtil::databaseRead(objects[i], AT_Name, &data);
 		
-
+		ObId tmpId = getFeederLink(objects[i]); ///feeder id
 		
 		QString id = QString::number(objects[i]);
 
 		OMString str = (OMString)data;
 		QString name = QString::fromUtf8(str.c_str());
 
-		QMap<QString,QString> map;
-		map.insert("id",id);
-		map.insert("name",name);
-
-		QString json = ToolUtil::convertQMapToJson(map);
-		jsonList.append(json);
-
 		
 
+		
+			QMap<QString,QString> map;
+			map.insert("id",id);
+			map.insert("name",name);
+			list.append(map);
+		
+		
 
-	
-	
-	
-	
-	
+		
+		//jsonList.append(json);	
 	
 		//string name = data;
 
@@ -123,7 +124,34 @@ void DataTransform::update()
 		//outFile << name <<endl;
 		
 	}
-	ToolUtil::writeJsonFileByInfo(jsonList,"H_TEST");
+
+		QString json = ToolUtil::convertQMapToJson(list);
+		ToolUtil::writeJsonFileByInfo(json,"H_TEST");
+}
+
+ObId DataTransform::getFeederLink(ObId dmsObjId)    //get Subordinate object,return obid
+{
+	AType at_feedrLink;
+	try
+	{
+		at_feedrLink= database->matchAType("FeederLink");
+	}
+	catch(Exception& e)
+	{
+		ToolUtil::myDebug(QString::number(dmsObjId)+": DATABASE Extract OT ERROR");
+		return 0;
+	}
+	LinkData feederLnk;
+	try
+	{
+		database->read(dmsObjId,at_feedrLink,&feederLnk);
+	}
+	catch(Exception& e)
+	{
+		ToolUtil::myDebug(QString::number(dmsObjId)+": DATABASE Extract OT ERROR");
+		return 0;
+	}
+	return (ObId)feederLnk;
 }
 
 //初始化注册回调函数

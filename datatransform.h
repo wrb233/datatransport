@@ -19,7 +19,7 @@ public:
 
 	//初始化注册回调函数
 	void initNotificationCallback();
-
+	ObId getFeederLink(ObId dmsObjId);
 	void timerTask();
 
 	void writeSQLFileByInfo(QStringList &tableNameList,QStringList &sqlList,QString fileName=QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+".sql",QString path="data");

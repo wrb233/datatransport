@@ -420,31 +420,38 @@ QDateTime ToolUtil::convertTimespecToQDatetime(timespec_t ts)
 
 }
 
-QString ToolUtil::convertQMapToJson(QMap<QString,QString> map)
+QString ToolUtil::convertQMapToJson(QList<QMap<QString,QString>>list)
 {
 	QString json = "";
 
 	QString jsonArrayStart = "[";
 	QString jsonArrayEnd = "]";	
-	QString jsonObject = "{\"%1\":\"%2\"}";
+	QString jsonObjectStart = "{";
+	QString jsonObjectEnd = "}";
+	QString jsonObject = "\"%1\":\"%2\"";
 
-	QMap<QString,QString>::iterator it; 
-	for ( it = map.begin(); it != map.end(); ++it )
+	for (int i=0;i<list.size();i++)
 	{
-		json = json.append(jsonObject.arg(it.key()).arg(it.value())).append(",");
+		QMap<QString,QString>::iterator it; 
+		QString jsonTemp = "";
+		for ( it = list[i].begin(); it != list[i].end(); ++it )
+		{
+			jsonTemp = jsonTemp.append(jsonObject.arg(it.key()).arg(it.value())).append(",");
+		}
+		jsonTemp = jsonTemp.left(jsonTemp.length()-1);
+		json = json.append(jsonObjectStart).append(jsonTemp).append(jsonObjectEnd).append(",");
 	}
-	json = json.left(json.length()-1);
+	json = json.left(json.length()-1);	
 	json = jsonArrayStart.append(json).append(jsonArrayEnd);
-	qDebug( )<<json;
 	
 	return json;
 }
 
-void ToolUtil::writeJsonFileByInfo(QStringList jsonList, QString fileName)
+void ToolUtil::writeJsonFileByInfo(QString json, QString fileName)
 {
 	ToolUtil::myDebug("MethodName:writeJsonFileByInfo start");
 	char* cpsenv = getenv("CPS_ENV");
-	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/monitor/json/"; 
+	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/share/monitor/json/"; 
 	QDir dir(sqlFileFolderPath);
 	if(!dir.exists())
 	{
@@ -461,10 +468,9 @@ void ToolUtil::writeJsonFileByInfo(QStringList jsonList, QString fileName)
 	}  
 
 	QTextStream datOutput(&f); 
-	foreach(QString json,jsonList)
-	{
-		datOutput << json<< endl; 
-	}
+	
+		datOutput << json << endl; 
+	
 	
 
 	datOutput.flush();
