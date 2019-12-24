@@ -129,30 +129,6 @@ int main(int argc, char *argv[])
 
 
 
-ChoiceData MainWindow::DeviceProperty(ObId dmsObjId) //get DMSCommunicateUnit Type
-{
-	AType at_DeviceProperty;
-	try
-	{
-		at_DeviceProperty= g_pDatabase->matchAType("DeviceProperty");     //Éè±¸ÊôÐÔ
-	}
-	catch(Exception& e)
-	{
-		ToolUtil::myDebug(QString::number(obId)+": DATABASE Extract OT ERROR");
-		return -1;
-	}
-	ChoiceData typeData;
-	try
-	{
-		g_pDatabase->read(id,at_DeviceProperty,&typeData);
-	}
-	catch(Exception& e)
-	{
-		ToolUtil::myDebug(QString::number(obId)+": DATABASE Extract OT ERROR");
-		return -1;
-	}
-	return (int)typeData;
-}
 	
 	
 

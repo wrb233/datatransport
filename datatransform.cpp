@@ -86,7 +86,7 @@ void DataTransform::update()
 	//定义for循环取出所有ObId
 	//QStringList jsonList;
 
-	QList<QMap<QString,QString>>list;
+	QList<QMap<QString,QString> >list;
 	for( int i=0;i<numElements;i++)
 	{
 
@@ -98,19 +98,30 @@ void DataTransform::update()
 		//利用databaseRead函数得到返回的name属性
         ToolUtil::databaseRead(objects[i], AT_Name, &data);
 		
-		ObId tmpId = getFeederLink(objects[i]); ///feeder id
 		
-		QString id = QString::number(objects[i]);
 
-		OMString str = (OMString)data;
+		//qDebug() << feederLinkId;
+		
+		QString DMSCommunicateUnit_id = QString::number(objects[i]); //dmscommunicateunit_id
+		
+		OMString str = (OMString)data;//DMS name
 		QString name = QString::fromUtf8(str.c_str());
+
+		ObId DeviceProperty_id = DeviceProperty(objects[i]); //deviceproperty id
+		QString DevicePropertyString_id = QString::number(DeviceProperty_id);
+
+		ObId Feeder_id = getFeederLink(objects[i]); ///feeder id
+		QString FeederString_id = QString::number(Feeder_id);
 
 		
 
 		
 			QMap<QString,QString> map;
-			map.insert("id",id);
-			map.insert("name",name);
+			map.insert("id",DMSCommunicateUnit_id);
+			map.insert("terminal_name",name);
+			map.insert("terminal_type",DevicePropertyString_id);
+			map.insert("source_id",FeederString_id);
+
 			list.append(map);
 		
 		
@@ -126,7 +137,7 @@ void DataTransform::update()
 	}
 
 		QString json = ToolUtil::convertQMapToJson(list);
-		ToolUtil::writeJsonFileByInfo(json,"H_TEST");
+		ToolUtil::writeJsonFileByInfo(json,"DMSTerminal.txt");
 }
 
 ObId DataTransform::getFeederLink(ObId dmsObjId)    //get Subordinate object,return obid
@@ -153,6 +164,31 @@ ObId DataTransform::getFeederLink(ObId dmsObjId)    //get Subordinate object,ret
 	}
 	return (ObId)feederLnk;
 }
+
+int DataTransform::DeviceProperty(ObId dmsObjId) //get DMSCommunicateUnit Type
+{
+	AType at_DeviceProperty;
+	try
+	{
+		at_DeviceProperty= database->matchAType("DeviceProperty");
+	}
+	catch(Exception& e)
+	{
+		return -1;
+	}
+	ChoiceData typeData;
+	try
+	{
+		database->read(dmsObjId,at_DeviceProperty,&typeData);
+	}
+	catch(Exception& e)
+	{
+		return -1;
+	}
+	return (int)typeData;
+}
+
+
 
 //初始化注册回调函数
 void DataTransform::initNotificationCallback()

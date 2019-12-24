@@ -420,7 +420,7 @@ QDateTime ToolUtil::convertTimespecToQDatetime(timespec_t ts)
 
 }
 
-QString ToolUtil::convertQMapToJson(QList<QMap<QString,QString>>list)
+QString ToolUtil::convertQMapToJson(QList<QMap<QString,QString> >list)
 {
 	QString json = "";
 
@@ -459,7 +459,7 @@ void ToolUtil::writeJsonFileByInfo(QString json, QString fileName)
 	}
 	ToolUtil::myDebug(sqlFileFolderPath);
 
-	fileName = fileName.append(QDateTime::currentDateTime().toString("_yyyyMMddhhmmsszzz"));
+	//fileName = fileName.append(QDateTime::currentDateTime().toString("_yyyyMMddhhmmsszzz"));
 	QFile f(sqlFileFolderPath+fileName);  
 	if(!f.open(QIODevice::WriteOnly | QIODevice::Text))  
 	{  
@@ -468,8 +468,9 @@ void ToolUtil::writeJsonFileByInfo(QString json, QString fileName)
 	}  
 
 	QTextStream datOutput(&f); 
-	
-		datOutput << json << endl; 
+
+	datOutput.setCodec("UTF-8");
+	datOutput << json << endl; 
 	
 	
 

@@ -106,7 +106,7 @@ public:
 	//将timespec格式转换为带有ff6毫秒格式的QDatetime
 	static QDateTime convertTimespecToQDatetime(timespec_t ts);
 
-	static QString convertQMapToJson(QList<QMap<QString,QString>>list);
+	static QString convertQMapToJson(QList<QMap<QString,QString> >list);
 
 	static void writeJsonFileByInfo(QString json, QString fileName);
 };
