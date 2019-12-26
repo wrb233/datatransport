@@ -410,10 +410,10 @@ QDateTime ToolUtil::convertTimespecToQDatetime(timespec_t ts)
 	OMSTime omT = OMSTime( ts );
 	omT.getDateTimeFields( &year, &month, &day, &hour, &minute, &second, &ms );
 
-	QTime q_tm = QTime( hour, minute, second, ms/1000	);
+	QTime q_tm = QTime( hour, minute, second );
 	QDate q_dt = QDate( year, month, day );
 	QDateTime datetime = QDateTime( q_dt, q_tm );
-	QString strtime = datetime.toString("yyyy-MM-dd hh:mm:ss.zzz");
+	QString strtime = datetime.toString("yyyy-MM-dd hh:mm:ss");
 	qDebug()<<strtime;
 
 	return datetime;
@@ -459,8 +459,9 @@ void ToolUtil::writeJsonFileByInfo(QString json, QString fileName)
 	}
 	ToolUtil::myDebug(sqlFileFolderPath);
 
-	//fileName = fileName.append(QDateTime::currentDateTime().toString("_yyyyMMddhhmmsszzz"));
-	QFile f(sqlFileFolderPath+fileName);  
+	fileName = fileName.append(QDateTime::currentDateTime().toString("_yyyyMMddhhmmss"));
+	fileName = fileName.append(".json");
+ 	QFile f(sqlFileFolderPath+fileName);  
 	if(!f.open(QIODevice::WriteOnly | QIODevice::Text))  
 	{  
 		ToolUtil::myDebug("Open failed");

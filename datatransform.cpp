@@ -26,9 +26,6 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 			std::exit(0);
 		}
 	}
-
-	
-
 }
 
 
@@ -48,96 +45,96 @@ DataTransform::~DataTransform()
 
 
 //update()代码逻辑
-void DataTransform::update()
+void DataTransform::update(){
+
+	handleDMSCommunicateUnit();    //生成终端表
+	handleFeeder();                //生成馈线表
+}
 
 
-
-
+void DataTransform::handleDMSCommunicateUnit()
 {
-	
-
-
-
-	  
-	
-	//新建输出流
-	//ofstream outFile;
-    //打开文件,在D盘根目录下创建Test2.txt文件
-    //outFile.open("D:\\Test2.txt");
-	//初始化find函数需要的参数
-
-
 	OT_DMSCommunicateUnit = database->matchOType("DMSCommunicateUnit");
 	Condition* conditions = NULL;
 	int numberOfConditions = 0;
 	int numElements = 0;
 	numElements = database->find(OT_DMSCommunicateUnit,conditions,numberOfConditions);
-	//新建*个ObId对象
 	ObId* objects = new ObId[numElements];
-	
-	//find函数重载
 	database->find(OT_DMSCommunicateUnit, conditions, numberOfConditions, objects, numElements);
 	
-	
-	//把满足条件的ObId个数输出 2282个
-	//outFile << "OType为DMSCommunicateUnit的节点共有" <<numElements << "个" << endl;
+	QList<QMap<QString,QString> >list;
 
-	
-	//定义for循环取出所有ObId
-	//QStringList jsonList;
+	for( int i=0;i<numElements;i++)
+	{
+		QString DMSCommunicateUnit_id = QString::number(objects[i]); 
+		
+		StringData data;
+        ToolUtil::databaseRead(objects[i], AT_Name, &data);
+		OMString str = (OMString)data;
+		QString name = QString::fromUtf8(str.c_str());
+
+		ObId DeviceProperty_id = DeviceProperty(objects[i]); 
+		QString DevicePropertyString_id = QString::number(DeviceProperty_id);
+
+		ObId Feeder_id = getFeederLink(objects[i]); 
+		QString FeederString_id = QString::number(Feeder_id);
+
+		QMap<QString,QString> map;
+		map.insert("id",DMSCommunicateUnit_id);
+		map.insert("terminal_name",name);
+		map.insert("terminal_type",DevicePropertyString_id);
+		map.insert("source_id",FeederString_id);
+
+		list.append(map);		
+	}
+		QString json = ToolUtil::convertQMapToJson(list);
+		ToolUtil::writeJsonFileByInfo(json,"DMSTerminal");
+}
+
+void DataTransform::handleFeeder()
+{
+	OT_Feeder = database->matchOType("Feeder");
+	Condition* conditions = NULL;
+	int numberOfConditions = 0;
+	int numElements = 0;
+	numElements = database->find(OT_Feeder,conditions,numberOfConditions);
+	ObId* objects = new ObId[numElements];
+	database->find(OT_Feeder, conditions, numberOfConditions, objects, numElements);
 
 	QList<QMap<QString,QString> >list;
+
 	for( int i=0;i<numElements;i++)
 	{
 
-		//输出所有ObId
-		//outFile << objects[i] << endl;
+		QString Feeder_id = QString::number(objects[i]); 
 
-		//声明StringData数据类型
 		StringData data;
-		//利用databaseRead函数得到返回的name属性
-        ToolUtil::databaseRead(objects[i], AT_Name, &data);
-		
-		
-
-		//qDebug() << feederLinkId;
-		
-		QString DMSCommunicateUnit_id = QString::number(objects[i]); //dmscommunicateunit_id
-		
-		OMString str = (OMString)data;//DMS name
+        ToolUtil::databaseRead(objects[i], AT_Name, &data);			
+		OMString str = (OMString)data;
 		QString name = QString::fromUtf8(str.c_str());
 
-		ObId DeviceProperty_id = DeviceProperty(objects[i]); //deviceproperty id
-		QString DevicePropertyString_id = QString::number(DeviceProperty_id);
 
-		ObId Feeder_id = getFeederLink(objects[i]); ///feeder id
-		QString FeederString_id = QString::number(Feeder_id);
+		ObId kv_level = getkvlevel(objects[i]); 
+		QString kv_levelString = QString::number(kv_level);
 
+
+
+		OType toFindOType = database->matchOType("PMSStation");
+		OType stopOType = database->matchOType("SubControlArea");
+		ObId PMSStation_id = ToolUtil::findOTypeByObId(objects[i], toFindOType, stopOType);
+		QString PMSStationString_id = QString::number(PMSStation_id);
 		
+		QMap<QString,QString> map;
+		map.insert("id",Feeder_id);
+		map.insert("feedername",name);
+		map.insert("kv_level",kv_levelString);
+		map.insert("pmsstation_id",PMSStationString_id);
 
-		
-			QMap<QString,QString> map;
-			map.insert("id",DMSCommunicateUnit_id);
-			map.insert("terminal_name",name);
-			map.insert("terminal_type",DevicePropertyString_id);
-			map.insert("source_id",FeederString_id);
-
-			list.append(map);
-		
-		
-
-		
-		//jsonList.append(json);	
-	
-		//string name = data;
-
-		//输出所有ObId对应的name属性
-		//outFile << name <<endl;
+		list.append(map);
 		
 	}
-
 		QString json = ToolUtil::convertQMapToJson(list);
-		ToolUtil::writeJsonFileByInfo(json,"DMSTerminal.txt");
+		ToolUtil::writeJsonFileByInfo(json,"Feeder");
 }
 
 ObId DataTransform::getFeederLink(ObId dmsObjId)    //get Subordinate object,return obid
@@ -187,6 +184,32 @@ int DataTransform::DeviceProperty(ObId dmsObjId) //get DMSCommunicateUnit Type
 	}
 	return (int)typeData;
 }
+
+ObId DataTransform::getkvlevel(ObId dmsObjId)    //get Subordinate object,return obid
+{
+	AType at_kvlevel;
+	try
+	{
+		at_kvlevel= database->matchAType("VLTPLink");
+	}
+	catch(Exception& e)
+	{
+		ToolUtil::myDebug(QString::number(dmsObjId)+": DATABASE Extract OT ERROR");
+		return 0;
+	}
+	LinkData kvlevel;
+	try
+	{
+		database->read(dmsObjId,at_kvlevel,&kvlevel);
+	}
+	catch(Exception& e)
+	{
+		ToolUtil::myDebug(QString::number(dmsObjId)+": DATABASE Extract OT ERROR");
+		return 0;
+	}
+	return (ObId)kvlevel;
+}
+
 
 
 

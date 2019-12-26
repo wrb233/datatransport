@@ -28,6 +28,13 @@ public:
 
 	void writeSQLFileByInfo(QStringList &tableNameList,QStringList &sqlList,QString fileName=QDateTime::currentDateTime().toString("yyyyMMddhhmmss")+".sql",QString path="data");
 
+	void handleDMSCommunicateUnit();
+	void handleFeeder();
+
+
+	ObId getkvlevel(ObId dmsObjId);
+	
+
 	public slots:
 	void update();
 
