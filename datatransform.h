@@ -33,6 +33,25 @@ public:
 
 
 	ObId getkvlevel(ObId dmsObjId);
+
+	void handlePMSStation();
+	int PMSStationType(ObId dmsObjId);
+	int PMSStationkvlevel(ObId dmsObjId);
+
+
+	void handleDistributionTransformer();
+
+	ObId DistributionTransformerPMSKVID(ObId dmsObjId);
+	ObId DistributionTransformerFeederID(ObId dmsObjId);
+
+	void handlePMSWindingTransformer();
+	//void handlePMSDoubleWindingTransformer();
+	//void handlePMSThreeWindingTransformer();
+
+
+	int PMSWindingTransformerRatedCapa(ObId dmsObjId);
+
+	void handlePMSBusbar();
 	
 
 	public slots:
