@@ -78,14 +78,7 @@ int main(int argc, char *argv[])
 	//打印版本信息
 
 	
-	qDebug("------------------------------------");
-	int num1 = 3;
-	int	num2 = 6;
-	int result;
-    result = maxnum(num1, num2);  // 调用比较函数maxnum()
-    qDebug() << "max vlaue is" << result << endl;
-	QString str1="welcome";
-	qDebug()<<str1;
+	
 
 
 	if (echoVersion(argc, argv)) 

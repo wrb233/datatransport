@@ -56,6 +56,11 @@ extern OType OT_PMSThreeWindingTransformer;
 extern OType OT_SubControlArea;
 extern OType OT_TransformerWinding;
 
+
+extern OType OT_PMSVLTP;
+extern OType OT_Folder;
+
+
 class ToolUtil:public QObject
 {
 	Q_OBJECT

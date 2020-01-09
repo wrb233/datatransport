@@ -36,12 +36,12 @@ public:
 
 	void handlePMSStation();
 	int PMSStationType(ObId dmsObjId);
-	int PMSStationkvlevel(ObId dmsObjId);
+	QString PMSStationkvlevel(ObId dmsObjId);
 
 
 	void handleDistributionTransformer();
 
-	ObId DistributionTransformerPMSKVID(ObId dmsObjId);
+	ObId DistributionTransformerVLTPLink(ObId dmsObjId);
 	ObId DistributionTransformerFeederID(ObId dmsObjId);
 
 	void handlePMSWindingTransformer();
@@ -52,9 +52,15 @@ public:
 	int PMSWindingTransformerRatedCapa(ObId dmsObjId);
 
 	void handlePMSBusbar();
+
+
+	void handlePMSKV();
+
+	double PMSKVvalue(char a[]);
 	
 
 	public slots:
+
 	void update();
 
 

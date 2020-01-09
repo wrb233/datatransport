@@ -62,7 +62,8 @@ OType OT_SubControlArea;
 OType OT_TransformerWinding;
 
 
-
+OType OT_PMSVLTP;
+OType OT_Folder;
 
 
 
@@ -132,6 +133,12 @@ bool ToolUtil::initOTypeAndAType()
 		OT_PMSThreeWindingTransformer = database->matchOType("PMSThreeWindingTransformer");
 		OT_SubControlArea = database->matchOType("SubControlArea");
 		OT_TransformerWinding = database->matchOType("TransformerWinding");
+
+
+
+		OT_PMSVLTP = database->matchOType("PMSVLTP");
+		OT_Folder = database->matchOType("Folder");
+
 	}
 	catch (Exception& e)
 	{
