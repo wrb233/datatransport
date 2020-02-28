@@ -147,17 +147,19 @@ bool ToolUtil::initOTypeAndAType()
 	return true;
 }
 
-QString ToolUtil::getHisRecordConf(QString key)
+QString ToolUtil::getIniConf(QString key)
 {
 	if(NULL==configIniRead)
 	{
 		char* cpsenv = getenv("CPS_ENV");
-		QString cfgPath = QString::fromUtf8(cpsenv) + "/etc/" + "hisrecord.ini"; 
+		QString cfgPath = QString::fromUtf8(cpsenv) + "/etc/" + "datatransform.ini"; 
 		QFile cfgFile(cfgPath);  
 		if (!cfgFile.exists())
 		{
 			QSettings *configIniWrite = new QSettings(cfgPath, QSettings::IniFormat);   
 			configIniWrite->setValue("/FaultTolerance/config", "on");
+			configIniWrite->setValue("/ConfigDataFunction/config", "off");
+			configIniWrite->setValue("/RuntimeDataFunction/config", "on");
 			configIniWrite->setValue("/InfoQueue/size", "1000000");
 			configIniWrite->setValue("/Debug/config", "on");
 			delete configIniWrite;

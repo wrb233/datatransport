@@ -89,13 +89,13 @@ int main(int argc, char *argv[])
 	//≈‰÷√¥Ú”°»’÷æ
 
 	
-	QString processName = "hisRecordLog";
+	QString processName = "datatransformLog";
 	char* cpsenv = getenv("CPS_ENV");
 	QString cfgPath = QString::fromUtf8(cpsenv) + "/etc/logConfig/" + processName + ".properties"; 
 	QFile cfgFile(cfgPath);  
 	if (!cfgFile.exists()) 
 	{    
-		ToolUtil::createDefaultLogConfigFile(cfgPath, "hisRecordLog"); 
+		ToolUtil::createDefaultLogConfigFile(cfgPath, "datatransformLog"); 
 	} 
 
 	log4cplus::initialize();  

@@ -1,14 +1,31 @@
-﻿生成启动时间为 2020/1/9 15:27:43。
-     1>项目“D:\professional\visualstudio\code\datatransform\datatransform.vcxproj”在节点 2 上(build 个目标)。
-     1>InitializeBuildStatus:
-         正在对“release\datatransform.unsuccessfulbuild”执行 Touch 任务。
+﻿生成启动时间为 2020/2/25 12:28:08。
+     1>项目“D:\professional\visualstudio\code\datatransform\datatransform.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“release\datatransform.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“release\datatransform.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        CustomBuild:
-         所有输出均为最新。
+         MOC DBThread.h
+         MOC InfoHandleThread.h
+         MOC ToolUtil.h
+         MOC datatransform.h
        ClCompile:
-         D:\professional\visualstudio\directory\VC\bin\x86_amd64\CL.exe /c /ID:\Qt\4.8.4\include\QtCore /ID:\Qt\4.8.4\include\QtGui /ID:\Qt\4.8.4\include /I. /ID:\CPS_Project\CPS\include /ID:\CPS_Project\win7\include /ID:\CPS_Project\CPS\include\net /I"D:\Qt\4.8.4\mkspecs\win32-msvc2010" /ID:\Qt\4.8.4\include\ActiveQt /Irelease /ID:\Qt\4.8.4\include /I"..\..\..\..\Qt\4.8.4\mkspecs\win32-msvc2010" /Zi /nologo /W0 /WX- /Od /D WIN32_LEAN_AND_MEAN /D _WINDOWS /D WIN32 /D QT_LARGEFILE_SUPPORT /D CPS_PROJECT20 /D _CRT_SECURE_NO_DEPRECATE /D _M_IX64 /D WIN32 /D QT_DLL /D QT_NO_DEBUG /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /D NDEBUG /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"release\\" /Fd".\vc100.pdb" /Gd /TP /errorReport:prompt datatransform.cpp -Zm200 
+         D:\professional\visualstudio\directory\VC\bin\x86_amd64\CL.exe /c /ID:\Qt\4.8.4\include\QtCore /ID:\Qt\4.8.4\include\QtGui /ID:\Qt\4.8.4\include /I. /ID:\CPS_Project\CPS\include /ID:\CPS_Project\win7\include /ID:\CPS_Project\CPS\include\net /I"D:\Qt\4.8.4\mkspecs\win32-msvc2010" /ID:\Qt\4.8.4\include\ActiveQt /Irelease /ID:\Qt\4.8.4\include /I"..\..\..\..\Qt\4.8.4\mkspecs\win32-msvc2010" /Zi /nologo /W0 /WX- /Od /D WIN32_LEAN_AND_MEAN /D _WINDOWS /D WIN32 /D QT_LARGEFILE_SUPPORT /D CPS_PROJECT20 /D _CRT_SECURE_NO_DEPRECATE /D _M_IX64 /D WIN32 /D QT_DLL /D QT_NO_DEBUG /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /D NDEBUG /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"release\\" /Fd".\vc100.pdb" /Gd /TP /errorReport:prompt DBThread.cpp IncrementCommit.cpp InfoHandleThread.cpp NotificationCallback.cpp ToolUtil.cpp datatransform.cpp main.cpp version.cpp release\moc_DBThread.cpp release\moc_InfoHandleThread.cpp release\moc_ToolUtil.cpp release\moc_datatransform.cpp -Zm200 
+         DBThread.cpp
+         IncrementCommit.cpp
+         InfoHandleThread.cpp
+         NotificationCallback.cpp
+         ToolUtil.cpp
          datatransform.cpp
+         main.cpp
+         version.cpp
+         moc_DBThread.cpp
+         moc_InfoHandleThread.cpp
+         moc_ToolUtil.cpp
+         moc_datatransform.cpp
+         Generating Code...
        ResourceCompile:
-         所有输出均为最新。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D WIN32_LEAN_AND_MEAN /D _WINDOWS /D WIN32 /D QT_LARGEFILE_SUPPORT /D CPS_PROJECT20 /D _CRT_SECURE_NO_DEPRECATE /D _M_IX64 /D WIN32 /D QT_DLL /D QT_NO_DEBUG /D QT_GUI_LIB /D QT_CORE_LIB /D QT_HAVE_MMX /D QT_HAVE_3DNOW /D QT_HAVE_SSE /D QT_HAVE_MMXEXT /D QT_HAVE_SSE2 /D QT_THREAD_SUPPORT /l"0x0409" /nologo /fo"release\datatransform.res" datatransform.rc 
        Link:
          D:\professional\visualstudio\directory\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"release\\datatransform.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:D:\CPS_Project\win7\lib /LIBPATH:D:\CPS_Project\win7\thirdpartylib /LIBPATH:D:\Qt\4.8.4\lib D:\CPS_Project\win7\thirdpartylib\qtmain.lib ACE.lib libdatabase.lib libORMDatabase.lib libapplication.lib UserMS.lib libtolerance.lib liborm.lib log4cplus.lib liboms.lib D:\CPS_Project\win7\thirdpartylib\QtGui4.lib D:\CPS_Project\win7\thirdpartylib\QtCore4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"release\datatransform.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\professional\visualstudio\code\datatransform\release\datatransform.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /MACHINE:X64 release\datatransform.res
          release\DBThread.obj
@@ -36,8 +53,8 @@
        FinalizeBuildStatus:
          正在删除文件“release\datatransform.unsuccessfulbuild”。
          正在对“release\datatransform.lastbuildstate”执行 Touch 任务。
-     1>已完成生成项目“D:\professional\visualstudio\code\datatransform\datatransform.vcxproj”(build 个目标)的操作。
+     1>已完成生成项目“D:\professional\visualstudio\code\datatransform\datatransform.vcxproj”(rebuild 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:38.29
+已用时间 00:00:34.58

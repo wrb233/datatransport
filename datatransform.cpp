@@ -168,11 +168,11 @@ void DataTransform::handlePMSStation()
 		ObId PMSStationType_id = PMSStationType(objects[i]); 
 		QString PMSStationTypeString_id = QString::number(PMSStationType_id);
 
-/*
+
 		ObId PMSStationkvlevel_id = PMSStationkvlevel(objects[i]); 
 		QString PMSStationkvlevelString_id = QString::number(PMSStationkvlevel_id);
-*/
-		QString PMSStationkvlevelString_id = PMSStationkvlevel(objects[i]);
+
+		//QString PMSStationkvlevelString_id = PMSStationkvlevel(objects[i]);
 
 		OType toFindOType = database->matchOType("SubControlArea");
 		OType stopOType = database->matchOType("PMSRoot");
@@ -643,7 +643,7 @@ int DataTransform::PMSStationType(ObId dmsObjId) //get DMSCommunicateUnit Type
 	return (int)typeData;
 }
 
-QString DataTransform::PMSStationkvlevel(ObId dmsObjId) //get DMSCommunicateUnit Type
+ObId DataTransform::PMSStationkvlevel(ObId dmsObjId) //get DMSCommunicateUnit Type
 {
 	AType at_PMSStationkvlevel;
 	try
@@ -716,7 +716,7 @@ QString DataTransform::PMSStationkvlevel(ObId dmsObjId) //get DMSCommunicateUnit
 		for(int k=0;k<numberOfVoltageGrade;k++)
 		{
 		  
-		  QString VoltageGrade_id = QString::number(VoltageGradeObid[k]);
+		  ObId VoltageGrade_id = VoltageGradeObid[k];
 
 
 		  StringData data;
@@ -729,7 +729,10 @@ QString DataTransform::PMSStationkvlevel(ObId dmsObjId) //get DMSCommunicateUnit
 					return VoltageGrade_id;
 
 				}else{
-					return QString fourhundred="51539608382";
+
+					ObId VoltageGrade_id_fourhundred = 51539608382;
+
+					return VoltageGrade_id_fourhundred;
 				}
 		 
 

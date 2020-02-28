@@ -36,7 +36,7 @@ public:
 
 	void handlePMSStation();
 	int PMSStationType(ObId dmsObjId);
-	QString PMSStationkvlevel(ObId dmsObjId);
+	ObId PMSStationkvlevel(ObId dmsObjId);
 
 
 	void handleDistributionTransformer();

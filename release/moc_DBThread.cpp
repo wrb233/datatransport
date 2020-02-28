@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'DBThread.h'
 **
-** Created: Wed Jan 8 15:37:17 2020
+** Created: Tue Feb 25 12:28:10 2020
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
