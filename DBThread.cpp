@@ -25,7 +25,7 @@ void DBThread::run()
 		qDebug() << "DB Thread is Working: " << QThread::currentThreadId();
 
 		char* cpsenv = getenv("CPS_ENV");
-		QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/hisrecord/data/"; 
+		QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/datatransform/data/"; 
 		QDir dir(sqlFileFolderPath);
 		if(!dir.exists())
 		{

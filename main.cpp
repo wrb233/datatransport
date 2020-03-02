@@ -16,7 +16,7 @@ using namespace std;
 DataTransform* dataTransform = NULL;
 DBPOOLHANDLE dbPoolHandle;//定义历史库全局变量
 Database *database = NULL;//实时数据库
-Logger hisRecordLog = Logger::getInstance(LOG4CPLUS_TEXT("hisRecordLog"));//全局日志
+Logger datatransformLog = Logger::getInstance(LOG4CPLUS_TEXT("hisRecordLog"));//全局日志
 QMutex infoCacheMutex;//消息缓存锁（全局锁）
 QList<DataModel> infoList;
 QMutex fileListMutex;//文件列表锁（全局锁）
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 	if (!ToolUtil::initOTypeAndAType())
 	{
 		ToolUtil::myDebug("Init OType And AType error");
-		LOG4CPLUS_ERROR(hisRecordLog, "Init OType And AType error");
+		LOG4CPLUS_ERROR(datatransformLog, "Init OType And AType error");
 		std::exit(0);
 	}
 

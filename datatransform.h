@@ -2,6 +2,7 @@
 #define HISRECORD_H
 
 #include "common.h"
+#include "cJSON.h"				  
 
 class DataTransform: public QtApplication
 {
@@ -56,6 +57,8 @@ public:
 
 	void handlePMSKV();
 
+	void handleDataCollection();//处理上海华电系统采集数据															   
+	void handleDataPointByConfig();//处理宝鸡手机app数据点，根据配置文件point_config.json读取																										
 	double PMSKVvalue(char a[]);
 	
 

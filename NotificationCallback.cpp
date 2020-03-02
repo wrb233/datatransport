@@ -7,7 +7,7 @@ extern  QList<DataModel> infoList;
 extern  QMutex infoCacheMutex;
 extern QMutex initMutex;
 extern Database *database;
-extern Logger hisRecordLog;
+extern Logger datatransformLog;
 
 extern QMap<ObId, Terminal> terminals;
 extern QMap<ObId, DPCPoint> dpcPoints;
@@ -38,7 +38,7 @@ void notificationOnlineStatus(const Notification* notif, void* clientdata)
 				dm.oldData = QString::number(oldData);
 				dm.time = time;
 
-				if (infoList.size()<(ToolUtil::getHisRecordConf("/InfoQueue/size")).toInt())
+				if (infoList.size()<(ToolUtil::getIniConf("/InfoQueue/size")).toInt())
 				{
 					QMutexLocker locker(&infoCacheMutex);
 					infoList.append(dm);
@@ -48,7 +48,7 @@ void notificationOnlineStatus(const Notification* notif, void* clientdata)
 		}
 		catch (Exception& e)
 		{
-			LOG4CPLUS_ERROR(hisRecordLog, "error: read AT_DeviceProperty error!!!");
+			LOG4CPLUS_ERROR(datatransformLog, "error: read AT_DeviceProperty error!!!");
 		}
 	}
 }
@@ -77,7 +77,7 @@ void notificationChannelState(const Notification* notif, void* clientdata)
 				dm.oldData = QString::number(oldData);
 				dm.time = time;
 
-				if (infoList.size()<(ToolUtil::getHisRecordConf("/InfoQueue/size")).toInt())
+				if (infoList.size()<(ToolUtil::getIniConf("/InfoQueue/size")).toInt())
 				{
 					QMutexLocker locker(&infoCacheMutex);
 					infoList.append(dm);
@@ -87,7 +87,7 @@ void notificationChannelState(const Notification* notif, void* clientdata)
 		}
 		catch (Exception& e)
 		{
-			LOG4CPLUS_ERROR(hisRecordLog, "error: read AT_DeviceProperty error!!!");
+			LOG4CPLUS_ERROR(datatransformLog, "error: read AT_DeviceProperty error!!!");
 		}
 	}
 	

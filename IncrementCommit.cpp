@@ -6,7 +6,7 @@
 //声明外部全局变量
 extern Database *database;
 extern DataTransform *dataTransform;
-extern Logger hisRecordLog;
+extern Logger datatransformLog;
 
 bool IncrementCommit::NotfyIncrementCommit()		//注册增量提交
 
@@ -41,7 +41,7 @@ bool IncrementCommit::NotfyIncrementCommit()		//注册增量提交
 	}
 	catch (Exception &e) {
 		localMacObId = 0;
-		LOG4CPLUS_ERROR(hisRecordLog, "notifyIncrementCommit() error,please check the Environment of database. " <<e.getDescription());
+		LOG4CPLUS_ERROR(datatransformLog, "notifyIncrementCommit() error,please check the Environment of database. " <<e.getDescription());
 		return false;
 		//exit(0);
 	}

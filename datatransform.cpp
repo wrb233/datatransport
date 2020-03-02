@@ -4,7 +4,7 @@
 #include "ToolUtil.h"
 
 extern  Database *database;
-extern Logger hisRecordLog;
+extern Logger datatransformLog;
 extern  QMutex fileListMutex;
 
 DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler,const OptionList& optionList,
@@ -13,7 +13,7 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 	database = getDatabase();
 	//_database = createDatabase();
 
-	if ("on"==ToolUtil::getHisRecordConf("/FaultTolerance/config"))
+	if ("on"==ToolUtil::getIniConf("/FaultTolerance/config"))
 	{
 		//Ã‚Â½ÃƒÂ¸Ã‚Â³ÃƒÅ’ÃƒË†ÃƒÂÃ‚Â´ÃƒÂ­
 		try
@@ -22,7 +22,7 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 		}catch(Exception& e)
 		{
 			ToolUtil::myDebug("Active faultTolerance error: system app exit");
-			LOG4CPLUS_ERROR(hisRecordLog, "Active faultTolerance error");
+			LOG4CPLUS_ERROR(datatransformLog, "Active faultTolerance error");
 			std::exit(0);
 		}
 	}
@@ -32,9 +32,10 @@ DataTransform::DataTransform(int &argc, char **argv,SignalHandler sigtermHandler
 //Ã‚Â±ÃƒÂ ÃƒÂÃ‚Â´Ã‚Â²Ãƒâ€ºÃ‚ÂºÃ‚Â¯ÃƒÅ ÃƒÂ½update()ÃƒÆ’Ã‚Â¿Ãƒâ€™Ã‚Â»ÃƒÆ’ÃƒÂ«Ãƒâ€“Ã‚Â´ÃƒÂÃƒÂÃƒâ€™Ã‚Â»Ã‚Â´ÃƒÅ½
 void DataTransform::timerTask()
 {
+	update();//先执行一遍，然后利用QTimer定时器隔一段时间再执行	  
 	QTimer *timer = new QTimer();
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-	timer->start(1000*60);
+	timer->start(5000*60);
 }
 
 DataTransform::~DataTransform()
@@ -46,14 +47,21 @@ DataTransform::~DataTransform()
 
 //update()Ã‚Â´ÃƒÂºÃƒâ€šÃƒÂ«Ãƒâ€šÃƒÅ¸Ã‚Â¼Ã‚Â­ffff水水水水
 void DataTransform::update(){
-
-	handleDMSCommunicateUnit();    //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€“Ãƒâ€¢Ã‚Â¶Ãƒâ€¹Ã‚Â±ÃƒÂ­
-	handleFeeder();                //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ‚¬Ã‚Â¡ÃƒÂÃƒÅ¸Ã‚Â±ÃƒÂ­
-	handlePMSStation();            //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ã‚Â±ÃƒÂ¤Ã‚ÂµÃƒÂ§Ãƒâ€¢Ã‚Â¾Ã‚Â±ÃƒÂ­
-	handleDistributionTransformer(); //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€¦ÃƒÂ¤Ã‚Â±ÃƒÂ¤Ã‚Â±ÃƒÂ­
-	handlePMSWindingTransformer();   //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°ÃƒÂÃ‚Â½Ã‚Â¾ÃƒÂ­Ã‚Â¡Ã‚Â¢ÃƒË†ÃƒÂ½Ã‚Â¾ÃƒÂ­Ã‚Â±ÃƒÂ¤Ãƒâ€˜Ã‚Â¹Ãƒâ€ ÃƒÂ·Ã‚Â±ÃƒÂ­  Ãƒâ€“ÃƒÂ·Ã‚Â±ÃƒÂ¤Ã‚Â±ÃƒÂ­
-	handlePMSBusbar();               //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€žÃ‚Â¸ÃƒÂÃƒÅ¸Ã‚Â±ÃƒÂ­
-	handlePMSKV();
+	if (ToolUtil::getIniConf("/ConfigDataFunction/config")=="on")
+	{
+		handleDMSCommunicateUnit();    //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€“Ãƒâ€¢Ã‚Â¶Ãƒâ€¹Ã‚Â±ÃƒÂ­
+		handleFeeder();                //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ‚¬Ã‚Â¡ÃƒÂÃƒÅ¸Ã‚Â±ÃƒÂ­
+		handlePMSStation();            //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ã‚Â±ÃƒÂ¤Ã‚ÂµÃƒÂ§Ãƒâ€¢Ã‚Â¾Ã‚Â±ÃƒÂ­
+		handleDistributionTransformer(); //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€¦ÃƒÂ¤Ã‚Â±ÃƒÂ¤Ã‚Â±ÃƒÂ­
+		handlePMSWindingTransformer();   //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°ÃƒÂÃ‚Â½Ã‚Â¾ÃƒÂ­Ã‚Â¡Ã‚Â¢ÃƒË†ÃƒÂ½Ã‚Â¾ÃƒÂ­Ã‚Â±ÃƒÂ¤Ãƒâ€˜Ã‚Â¹Ãƒâ€ ÃƒÂ·Ã‚Â±ÃƒÂ­  Ãƒâ€“ÃƒÂ·Ã‚Â±ÃƒÂ¤Ã‚Â±ÃƒÂ­
+		handlePMSBusbar();               //Ãƒâ€°ÃƒÂºÃ‚Â³Ãƒâ€°Ãƒâ€žÃ‚Â¸ÃƒÂÃƒÅ¸Ã‚Â±ÃƒÂ­
+		handlePMSKV();
+		handleDataPointByConfig();
+	}
+	if (ToolUtil::getIniConf("/RuntimeDataFunction/config")=="on")
+	{
+		handleDataCollection();//处理上海华电系统采集数据
+	}
 }
 
 
@@ -916,7 +924,7 @@ void DataTransform::writeSQLFileByInfo(QStringList &tableNameList,QStringList &s
 {
 	ToolUtil::myDebug("MethodName:writeSQLFileByInfo start");
 	char* cpsenv = getenv("CPS_ENV");
-	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/hisrecord/"+path+"/"; 
+	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/datatransform/"+path+"/"; 
 	QDir dir(sqlFileFolderPath);
 	if(!dir.exists())
 	{
@@ -948,3 +956,107 @@ void DataTransform::writeSQLFileByInfo(QStringList &tableNameList,QStringList &s
 	f.close();
 	ToolUtil::myDebug("MethodName:writeSQLFileByInfo end");
 }
+void DataTransform::handleDataCollection()//处理上海华电系统采集数据
+{
+	char* cpsenv = getenv("CPS_ENV");
+	QString sqlFileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/share/"; 
+	QString filePath = sqlFileFolderPath + "datapoint.txt";
+	QStringList  dataList;
+	ToolUtil::readFileByPath(filePath, dataList);
+
+	QList<QMap<QString,QString> >list;
+	foreach(QString data, dataList)
+	{
+		QMap<QString,QString> map;
+
+		ObId obId = (ObId)data.toLongLong();
+		
+		if (ToolUtil::databaseExtractOType(obId)==OT_DPSPoint)
+		{
+			map.insert("obid",QString::number(obId));
+
+			StringData nameData = "";
+			ToolUtil::databaseRead(obId, AT_Name, &nameData);
+			std::string name = std::string(nameData);
+			map.insert("des",QString::fromUtf8(name.c_str()));
+			map.insert("type",QString::number(0));
+
+			IntegerData stateDataTemp;
+			ToolUtil::databaseRead(obId, AT_FieldState, &stateDataTemp);
+			int stateData = (int)stateDataTemp;
+			map.insert("value",QString::number(stateData));
+		}else if (ToolUtil::databaseExtractOType(obId)==OT_MVPoint)
+		{
+			map.insert("obid",QString::number(obId));
+
+			StringData nameData = "";
+			ToolUtil::databaseRead(obId, AT_Name, &nameData);
+			std::string name = std::string(nameData);
+			map.insert("des",QString::fromUtf8(name.c_str()));
+			map.insert("type",QString::number(1));
+
+			FloatData valueDataTemp;
+			ToolUtil::databaseRead(obId, AT_FieldValue, &valueDataTemp);
+			float valueData = (float)valueDataTemp;
+			map.insert("value",QString::number(valueData));
+		}
+		if (map.size()>0)
+		{
+			list.append(map);	
+		}		
+	}
+	QString json = ToolUtil::convertQMapToJson(list);
+	ToolUtil::writeJsonFileByInfo(json,"data");
+}
+
+void DataTransform::handleDataPointByConfig()
+{
+	char* cpsenv = getenv("CPS_ENV");
+	QString fileFolderPath = QDir::fromNativeSeparators(QString::fromUtf8(cpsenv)) + "/data/share/"; 
+	QString filePath = fileFolderPath + "point_config.json";
+	QStringList  dataList;
+	ToolUtil::readFileByPath(filePath, dataList);
+	QString data = dataList.join("");
+	if (!data.isEmpty())
+	{
+		cJSON* json=cJSON_Parse(data.toStdString().c_str());	
+		cJSON *arrayItem = cJSON_GetObjectItem(json,"data");
+		QList<QMap<QString,QString> >list;
+
+		for (int i=0;i<cJSON_GetArraySize(arrayItem);i++)
+		{
+			QMap<QString,QString> map;
+
+			cJSON *object = cJSON_GetArrayItem(arrayItem,i);		
+			cJSON *tablenameItem = cJSON_GetObjectItem(object,"tablename");
+			map.insert("tablename",QString::fromUtf8(tablenameItem->valuestring));
+			cJSON *fieldnameItem = cJSON_GetObjectItem(object,"fieldname");
+			map.insert("fieldname",QString::fromUtf8(fieldnameItem->valuestring));
+			cJSON *objidItem = cJSON_GetObjectItem(object,"objid");
+			map.insert("objid",QString::fromUtf8(objidItem->valuestring));
+			cJSON *atypeItem = cJSON_GetObjectItem(object,"atype");
+			map.insert("atype",QString::fromUtf8(atypeItem->valuestring));
+			ObId obId = (ObId)QString::fromUtf8(objidItem->valuestring).toLongLong();
+			AType atype = ToolUtil::databaseMatchAType(atypeItem->valuestring);
+			if (atype==AT_Value)
+			{
+				FloatData floatData;
+				ToolUtil::databaseRead(obId,atype,&floatData);
+				double valueD = (double)floatData;
+				map.insert("value",QString::number(valueD));
+			}else if (atype==AT_State)
+			{
+				IntegerData intData;
+				ToolUtil::databaseRead(obId,atype,&intData);
+				int valueI = (int)intData;
+				map.insert("value",QString::number(valueI));
+			}	
+
+			list.append(map);	
+		}
+		QString jsonOut = ToolUtil::convertQMapToJson(list);
+		ToolUtil::writeJsonFileByInfo(jsonOut,"point_config");
+
+		cJSON_Delete(json);
+	}
+}																				

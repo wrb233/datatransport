@@ -77,7 +77,9 @@ HEADERS += common.h\
 		   InfoHandleThread.h\
 		   NotificationCallback.h\
 		   ToolUtil.h\
-		   version.h	   
+		   version.h\
+		   cJSON.h
+
 		   
 SOURCES += DBThread.cpp\
            datatransform.cpp\
@@ -86,7 +88,8 @@ SOURCES += DBThread.cpp\
 		   main.cpp\
 		   NotificationCallback.cpp\
 		   ToolUtil.cpp\
-		   version.cpp
+		   version.cpp\
+		   cJSON.cpp
 		   
 
 

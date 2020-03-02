@@ -3,7 +3,7 @@
 
 extern Database *database;//实时数据库指针外部全局变量
 extern DBPOOLHANDLE dbPoolHandle;//历史库外部全局变量
-extern Logger hisRecordLog;//log4c日志
+extern Logger datatransformLog;//log4c日志
 extern DataTransform* dataTransform;
 extern  bool isActiveFault;
 extern  QSettings *configIniRead;
@@ -21,6 +21,8 @@ AType AT_DPSPointLink;
 AType AT_Factory;
 AType AT_FaultState;
 AType AT_FeederLink;
+AType AT_FieldState;//新增					
+AType AT_FieldValue;//新增					
 AType AT_KeyName;
 AType AT_Limit;
 AType AT_MeasLink;
@@ -94,6 +96,8 @@ bool ToolUtil::initOTypeAndAType()
 		AT_Factory = database->matchAType("Factory");
 		AT_FaultState = database->matchAType("FaultState");
 		AT_FeederLink = database->matchAType("FeederLink");
+		AT_FieldState = database->matchAType("FieldState");//新增											 
+		AT_FieldValue = database->matchAType("FieldValue");//新增											 
 		AT_KeyName = database->matchAType("KeyName");
 		AT_Limit = database->matchAType("Limit");
 		AT_MeasLink = database->matchAType("MeasLink");
@@ -157,9 +161,9 @@ QString ToolUtil::getIniConf(QString key)
 		if (!cfgFile.exists())
 		{
 			QSettings *configIniWrite = new QSettings(cfgPath, QSettings::IniFormat);   
-			configIniWrite->setValue("/FaultTolerance/config", "on");
-			configIniWrite->setValue("/ConfigDataFunction/config", "off");
-			configIniWrite->setValue("/RuntimeDataFunction/config", "on");
+			configIniWrite->setValue("/FaultTolerance/config", "off");
+			configIniWrite->setValue("/ConfigDataFunction/config", "on");
+			configIniWrite->setValue("/RuntimeDataFunction/config", "off");
 			configIniWrite->setValue("/InfoQueue/size", "1000000");
 			configIniWrite->setValue("/Debug/config", "on");
 			delete configIniWrite;
@@ -283,7 +287,7 @@ bool ToolUtil::UpdateConnectDB()
 
 		if(0==CPS_ORM_GetDBPoolState(dbPoolHandle))
 		{
-			LOG4CPLUS_ERROR(hisRecordLog, "Database dbPoolHandle State Error");
+			LOG4CPLUS_ERROR(datatransformLog, "Database dbPoolHandle State Error");
 			return false;
 		}
 	}
@@ -292,12 +296,12 @@ bool ToolUtil::UpdateConnectDB()
 
 bool ToolUtil::isCurrentMachine()
 {
-	if ("on"==ToolUtil::getHisRecordConf("/FaultTolerance/config"))
+	if ("on"==ToolUtil::getIniConf("/FaultTolerance/config"))
 	{
 		if (!dataTransform->getFaultTolerance()->amITheCurrentMachine())
 		{
 			ToolUtil::myDebug("I am not TheCurrentMachine");
-			LOG4CPLUS_ERROR(hisRecordLog, "I am not TheCurrentMachine");
+			LOG4CPLUS_ERROR(datatransformLog, "I am not TheCurrentMachine");
 			return false;
 		}
 	}	
@@ -306,7 +310,7 @@ bool ToolUtil::isCurrentMachine()
 
 void ToolUtil::myDebug(QString content)
 {
-	if ("on"==ToolUtil::getHisRecordConf("/Debug/config"))
+	if ("on"==ToolUtil::getIniConf("/Debug/config"))
 	{
 		qDebug()<<content<< endl; ;
 	}
@@ -356,6 +360,19 @@ OType ToolUtil::databaseMatchOType(const char* name)
 	return oType;
 }
 
+AType ToolUtil::databaseMatchAType(const char* name)
+{
+	AType aType = 0;
+	try
+	{
+		aType = database->matchAType(name);
+	}
+	catch (Exception& e)
+	{
+		ToolUtil::myDebug(QString::fromUtf8(name)+": DATABASE MATCH ATYPE OT ERROR");
+	}
+	return aType;
+}													
 OType ToolUtil::databaseExtractOType(ObId obId)
 {
 	OType oType = 0;
@@ -494,3 +511,30 @@ void ToolUtil::writeJsonFileByInfo(QString json, QString fileName)
 	f.close();
 	ToolUtil::myDebug("MethodName:writeJsonFileByInfo end");
 }
+bool ToolUtil::readFileByPath(QString &filePath,QStringList &dataList)
+{
+	QFile file(filePath);  
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text)) 
+	{
+		QTextStream in(&file);  
+
+		QString line = in.readLine();  
+
+		while (!line.isNull()) 
+		{
+			dataList.append(line);
+			line = in.readLine();
+		}
+		/*while(!file.atEnd())
+		{  
+		QByteArray line = file.readLine();  
+		QString str(line);  
+		sqlList.append(str);
+		}   */
+		in.flush();
+		file.flush();
+		file.close();
+		return true;
+	}  
+	return false;
+}																	  

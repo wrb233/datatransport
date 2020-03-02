@@ -16,6 +16,8 @@ extern AType AT_DPSPointLink;
 extern AType AT_Factory;
 extern AType AT_FaultState;
 extern AType AT_FeederLink;
+extern AType AT_FieldState;//新增
+extern AType AT_FieldValue;//新增						   						   
 extern AType AT_KeyName;
 extern AType AT_Limit;
 extern AType AT_MeasLink;
@@ -68,8 +70,8 @@ public:
 	ToolUtil();
 	~ToolUtil();
 
-	//获取配置文件hisrecord.ini中的配置信息
-	static QString getHisRecordConf(QString key);
+	//获取配置文件ini中的配置信息
+	static QString getIniConf(QString key);
 
 	//创建log4日志句柄
 	static void createDefaultLogConfigFile(QString fileName,QString LoggerName);
@@ -98,6 +100,8 @@ public:
 	//实时库matchOtype，加try catch异常统一捕获
 	static OType databaseMatchOType(const char* name);
 
+	//实时库matchAtype，加try catch异常统一捕获
+	static AType databaseMatchAType(const char* name);												   
 	//实时库extractOType，加try catch异常统一捕获
 	static OType databaseExtractOType(ObId obId);
 
@@ -114,6 +118,7 @@ public:
 	static QString convertQMapToJson(QList<QMap<QString,QString> >list);
 
 	static void writeJsonFileByInfo(QString json, QString fileName);
+	static bool readFileByPath(QString &filePath,QStringList &dataList);																 
 };
 
 #endif
